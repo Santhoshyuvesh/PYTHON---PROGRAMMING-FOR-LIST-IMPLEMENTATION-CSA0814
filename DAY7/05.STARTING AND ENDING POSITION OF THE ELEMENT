@@ -1,0 +1,14 @@
+lst=[1,1,2,3,4,2,5,6]
+target=2
+
+if target in lst:
+  s_p=lst.index(target)
+  e_p=len(lst) -1 - lst[::-1].index(target)
+  print("starting position :",s_p)
+  print("ending position :",e_p)
+else:
+  print("not found")
+
+output:
+starting element=2
+ending element = 5
