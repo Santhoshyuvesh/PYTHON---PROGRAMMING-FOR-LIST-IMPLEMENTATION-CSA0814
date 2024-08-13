@@ -1,0 +1,8 @@
+s1="abcd"
+s2="wxyz"
+
+ns=""
+a  ns+=s1[i]+s2[i]
+print(ns)
+
+output : awbxcydz
