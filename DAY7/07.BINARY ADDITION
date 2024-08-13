@@ -1,0 +1,9 @@
+b1 = '1010'
+b2 = '1101'
+
+r = bin(int(b1, 2) + int(b2, 2))[2:]
+print(f"Binary addition of {b1} and {b2} is {r}")
+
+Output : Binary addition of 1010 and 1101 is 10111
+
+
