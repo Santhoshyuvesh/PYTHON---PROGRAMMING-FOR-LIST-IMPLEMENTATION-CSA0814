@@ -1,0 +1,6 @@
+elements=3
+lst=[1,2,3,3,4,5]
+frequency=lst.count(elements)
+print(frequency)
+
+otuput:2
