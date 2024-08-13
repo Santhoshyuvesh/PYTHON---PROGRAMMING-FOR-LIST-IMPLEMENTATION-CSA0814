@@ -1,0 +1,8 @@
+s1, s2 = "paper", "title"
+
+if len(s1) != len(s2):
+    print(False)
+else:
+print(len(set(zip(s1, s2))) == len(set(s1)) == len(set(s2)))
+
+output : true
