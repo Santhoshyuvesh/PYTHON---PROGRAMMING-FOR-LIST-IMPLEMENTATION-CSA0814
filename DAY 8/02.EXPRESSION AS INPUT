@@ -1,0 +1,6 @@
+exp ="2*7+9"
+try:
+    res = eval(exp)
+    print("Result:", res)
+except Exception as e:
+    print("Error:", e)
