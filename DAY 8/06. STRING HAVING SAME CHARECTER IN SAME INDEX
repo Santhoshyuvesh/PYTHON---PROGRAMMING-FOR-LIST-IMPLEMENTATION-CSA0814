@@ -1,0 +1,7 @@
+str1 = "helo"
+str2 = "helxo"
+matching_ele= 0
+for char1, char2 in zip(str1, str2):
+    if char1 == char2:
+        matching_ele+= 1
+print("Number of matching characters at the same index:", matching_ele)
