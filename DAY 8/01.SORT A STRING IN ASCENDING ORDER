@@ -1,0 +1,8 @@
+s="banana"
+sorted_s="".join(sorted(s))
+print("sorted elements are :",sorted_s)
+
+for i in range(len(sorted_s)-1):
+    if sorted_s[i]==sorted_s[i+1]:
+     print(sorted_s[i],"repeates at index ",i)
+
