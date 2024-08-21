@@ -1,0 +1,6 @@
+from math import comb
+n=6
+ways=0
+for k in range(n//2+1):
+    ways+=comb(n-k,k)
+print(ways)
