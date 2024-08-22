@@ -1,0 +1,6 @@
+limit=500
+t_sum=0
+for num in range(limit):
+    if num%3==0 or num%5==0:
+        t_sum+=num
+print(t_sum)        
