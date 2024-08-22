@@ -1,0 +1,20 @@
+def fractional_knapsack(items, capacity):
+    items = sorted(items, key=lambda x: x[0] / x[1], reverse=True)
+    total_profit, result = 0, []
+    
+    for profit, weight in items:
+        if capacity >= weight:
+            capacity -= weight
+            total_profit += profit
+            result.append((profit, weight))
+        else:
+            total_profit += profit * (capacity / weight)
+            result.append((profit * (capacity / weight), capacity))
+            break
+    
+    return result, total_profit
+items = [(60, 10), (100, 20), (120, 30)]
+capacity = 50
+selected_items, total_profit = fractional_knapsack(items, capacity)
+print("Selected items (profit, weight):", selected_items)
+print("Total profit:", total_profit)
