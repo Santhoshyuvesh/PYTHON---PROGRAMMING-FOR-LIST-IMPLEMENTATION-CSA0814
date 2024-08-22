@@ -1,0 +1,14 @@
+num="1234"
+d_sum= sum(int(digit) for digit in num if digit.isdigit())
+def max_total(triangle):
+    for row in range(len(triangle) - 2, -1, -1):
+        for col in range(len(triangle[row])):
+            triangle[row][col] += max(triangle[row + 1][col], triangle[row + 1][col + 1])
+    return triangle[0][0]
+triangle = [
+    [3],
+    [4, 6],
+    [2, 7, 6],
+    [8, 5, 9, 3]
+]
+print(max_total(triangle))
