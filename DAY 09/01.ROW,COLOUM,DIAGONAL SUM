@@ -1,0 +1,14 @@
+import numpy as np
+matrix = np.array([
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+])
+row_sums = np.sum(matrix, axis=1)
+col_sums = np.sum(matrix, axis=0)
+diag_sum1 = np.trace(matrix)  # Main diagonal
+diag_sum2 = np.trace(np.fliplr(matrix))  # Anti-diagonal
+print("Row sums:", row_sums)
+print("Column sums:", col_sums)
+print("Main diagonal sum:", diag_sum1)
+print("Anti-diagonal sum:", diag_sum2)
