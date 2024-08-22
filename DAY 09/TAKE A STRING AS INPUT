@@ -1,0 +1,14 @@
+def justify_text(sentence, width=50):
+    left_aligned = sentence.ljust(width)
+    center_aligned = sentence.center(width)
+    right_aligned = sentence.rjust(width)
+    return left_aligned, center_aligned, right_aligned
+sentence ="hello world"
+width = 30
+left, center, right = justify_text(sentence, width)
+print("Left aligned:")
+print(left)
+print("\nCenter aligned:")
+print(center)
+print("\nRight aligned:")
+print(right)
