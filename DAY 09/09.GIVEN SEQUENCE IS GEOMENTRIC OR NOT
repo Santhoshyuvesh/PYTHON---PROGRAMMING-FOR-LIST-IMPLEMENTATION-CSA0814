@@ -1,0 +1,13 @@
+def geometric_info(seq):
+    nums = list(map(int, seq.split()))
+    if len(nums) < 2:
+        return (False, None)  # Not enough terms to determine a geometric sequence
+    ratios = [nums[i] / nums[i-1] for i in range(1, len(nums))]
+    if len(set(ratios)) == 1:
+        return (True, ratios[0])
+    return (False, None)
+
+# Example usage:
+sequence = "2 6 18 54"
+is_geom, ratio = geometric_info(sequence)
+print(f"Geometric: {is_geom}, Common Ratio: {ratio}")
