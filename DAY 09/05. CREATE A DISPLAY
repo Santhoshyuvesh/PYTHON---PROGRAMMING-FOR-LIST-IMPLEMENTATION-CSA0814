@@ -1,0 +1,11 @@
+import itertools
+
+keys = [
+    ['A', 'B', 'C'],   # Key 1
+    ['D', 'E'],        # Key 2
+    ['1', '2', '3'],   # Key 3
+]
+
+comb = itertools.product(*keys)
+for combo in comb:
+    print(''.join(combo))
