@@ -1,0 +1,122 @@
+PYTHON CODES:
+import tkinter as tk
+from tkinter import filedialog
+from tkinter import ttk
+import markdown
+import pygments
+from pygments.formatters import HtmlFormatter
+from pygments.lexers import get_lexer_by_name
+from pygments.util import ClassNotFound
+from bs4 import BeautifulSoup
+from tkhtmlview import HTMLLabel
+
+class MarkdownViewer(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Markdown File Viewer")
+        self.geometry("800x600")
+        
+        self.create_widgets()
+        
+    def create_widgets(self):
+        # Create menu
+        menu_bar = tk.Menu(self)
+        self.config(menu=menu_bar)
+        
+        file_menu = tk.Menu(menu_bar, tearoff=0)
+        menu_bar.add_cascade(label="File", menu=file_menu)
+        file_menu.add_command(label="Open", command=self.open_file)
+        
+        # Create a frame for the HTML content
+        self.html_frame = HTMLLabel(self)
+        self.html_frame.pack(fill="both", expand=True)
+        
+        # Create a text widget for zoom control
+        self.zoom_slider = ttk.Scale(self, from_=0.5, to=2.0, orient='horizontal', command=self.zoom)
+        self.zoom_slider.set(1.0)
+        self.zoom_slider.pack(fill='x')
+        
+    def open_file(self):
+        file_path = filedialog.askopenfilename(filetypes=[("Markdown Files", "*.md")])
+        if file_path:
+            with open(file_path, "r") as file:
+                markdown_text = file.read()
+            html_content = self.convert_markdown_to_html(markdown_text)
+            self.html_frame.set_html(html_content)
+            
+    def convert_markdown_to_html(self, markdown_text):
+        # Convert Markdown to HTML
+        html_content = markdown.markdown(markdown_text, extensions=['fenced_code'])
+        
+        # Apply syntax highlighting
+        soup = BeautifulSoup(html_content, 'html.parser')
+        for code_block in soup.find_all('code'):
+            lexer_name = code_block.get('class', [''])[0]
+            try:
+                lexer = get_lexer_by_name(lexer_name, stripall=True)
+            except ClassNotFound:
+                lexer = get_lexer_by_name('text', stripall=True)
+            formatter = HtmlFormatter(style='colorful')
+            highlighted_code = pygments.highlight(code_block.string, lexer, formatter)
+            code_block.replace_with(BeautifulSoup(highlighted_code, 'html.parser'))
+        
+        return str(soup)
+
+    def zoom(self, scale_value):
+        scale = float(scale_value)
+        style = f"body {{ font-size: {scale}em; }}"
+        self.html_frame.set_html(f"<style>{style}</style>{self.html_frame.get_html()}")
+
+
+if __name__ == "__main__":
+    app = MarkdownViewer()
+    app.mainloop()
+
+
+MARKDOWN FILE CODES:
+# Sample Markdown Document
+
+Welcome to the Markdown sample document. Below are some of the features you can use:
+
+## Headings
+
+### Heading 3
+
+#### Heading 4
+
+## Formatting
+
+- **Bold text** can be created with `**double asterisks**` or `__double underscores__`.
+- *Italic text* can be created with `*single asterisk*` or `_single underscore_`.
+
+## Lists
+
+### Unordered List
+
+- Item 1
+- Item 2
+  - Subitem 2.1
+  - Subitem 2.2
+
+### Ordered List
+
+1. First item
+2. Second item
+3. Third item
+
+## Links and Images
+
+- [Python Programming for List Implementation](https://github.com/Santhoshyuvesh/PYTHON---PROGRAMMING-FOR-LIST-IMPLEMENTATION-CSA0814)
+- ![GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
+
+## Code
+
+### Inline Code
+
+Use backticks for `inline code`.
+
+### Code Block
+
+```python
+def hello_world():
+    print("Hello, World!")
